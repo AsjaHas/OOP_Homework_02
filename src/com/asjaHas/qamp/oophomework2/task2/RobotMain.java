@@ -6,13 +6,15 @@ public class RobotMain {
         Robot robot1 = new Robot(1, 4);
         Robot robot2 = new Robot(0, 0);
 
+        robot1.printLastPosition(1);
+        robot2.printLastPosition(1);
 
-        System.out.println(robot1.getPosition().x + ", " + robot1.getPosition().y);
         robot1.moveNorth();
         robot1.moveEast();
-        System.out.println(robot1.getPosition().x + ", " + robot1.getPosition().y);
 
-        robot1.printLastPosition();
+        System.out.println("The number of moves the robot has performed is: " + robot1.getMoves());
+        robot1.printLastPosition(5);
+
         System.out.println("The euclidean distance from the initial position is: " + robot1.getDistance());
 
     }

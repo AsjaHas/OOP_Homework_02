@@ -1,62 +1,72 @@
 package com.asjaHas.qamp.oophomework2.task2;
 
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class Robot {
-    Positions position;
-    int moves;
+    private List<Position> positionList;
 
     public Robot() {
-        this.position = new Positions(0, 0);
-        this.moves = 0;
+        this.positionList = new ArrayList<>();
+        positionList.add(new Position(0, 0));
     }
 
     public Robot(int x, int y) {
-        this.position = new Positions(x, y);
-        this.moves = 0;
+        this.positionList = new ArrayList<>();
+        positionList.add(new Position(x, y));
     }
 
     public void moveSouth() {
-        this.position.setPosition(this.position.x, this.position.y - 1);
-        this.moves++;
+        Position currentPosition = positionList.get(positionList.size() - 1);
+        Position newPosition = new Position(currentPosition.getX(), currentPosition.getY() - 1);
+        positionList.add(newPosition);
     }
 
     public void moveNorth() {
-        this.position.setPosition(this.position.x, this.position.y + 1);
-        this.moves++;
+        Position currentPosition = positionList.get(positionList.size() - 1);
+        Position newPosition = new Position(currentPosition.getX(), currentPosition.getY() + 1);
+        positionList.add(newPosition);
     }
 
     public void moveEast() {
-        this.position.setPosition(this.position.x + 1, this.position.y);
-        this.moves++;
+        Position currentPosition = positionList.get(positionList.size() - 1);
+        Position newPosition = new Position(currentPosition.getX() + 1, currentPosition.getY());
+        positionList.add(newPosition);
     }
 
     public void moveWest() {
-        this.position.setPosition(this.position.x - 1, this.position.y);
-        this.moves++;
+        Position currentPosition = positionList.get(positionList.size() - 1);
+        Position newPosition = new Position(currentPosition.getX() - 1, currentPosition.getY());
+        positionList.add(newPosition);
     }
 
-    public Positions getPosition() {
-        return this.position;
+    public Position getPosition() {
+        return positionList.get(positionList.size() - 1);
     }
+
 
     public double getDistance() {
-        int x0 = this.position.getPositionHistory().get(0)[0];
-        int y0 = this.position.getPositionHistory().get(0)[1];
-        int x = this.position.x;
-        int y = this.position.y;
-        return Math.sqrt(((x0 - x) * (x0 - x)) + ((y0 - y) * (y0 - y)));
+        int x0 = positionList.get(0).getX();
+        int y0 = positionList.get(0).getY();
+        int x = positionList.get(positionList.size() - 1).getX();
+        int y = positionList.get(positionList.size() - 1).getY();
+        return Math.sqrt(Math.pow(x - x0, 2) + Math.pow(y - y0, 2));
     }
 
     public int getMoves() {
-        return this.moves;
+        return positionList.size() - 1;
     }
 
-    public void printLastPosition() {
-        ArrayList<int[]> positionHistory = this.position.getPositionHistory();
-        for (int i = positionHistory.size() - 1; i >= 0; i--) {
-            System.out.println("(" + positionHistory.get(i)[0] + ", " + positionHistory.get(i)[1] + ")");
+    public void printLastPosition(int n) {
+        int startIndex;
+        if (n >= positionList.size()) {
+            startIndex = 0;
+        } else {
+            startIndex = positionList.size() - n;
+        }
+        for (int i = positionList.size() - 1; i >= startIndex; i--) {
+            Position p = this.positionList.get(i);
+            System.out.println("(" + p.getX() + ", " + p.getY() + ")");
         }
     }
 }
