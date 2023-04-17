@@ -17,25 +17,26 @@ public class Robot {
     }
 
     public void moveSouth() {
-        Position currentPosition = positionList.get(positionList.size() - 1);
+        Position currentPosition = getPosition();
         Position newPosition = new Position(currentPosition.getX(), currentPosition.getY() - 1);
         positionList.add(newPosition);
     }
 
     public void moveNorth() {
-        Position currentPosition = positionList.get(positionList.size() - 1);
+        Position currentPosition = getPosition();
         Position newPosition = new Position(currentPosition.getX(), currentPosition.getY() + 1);
         positionList.add(newPosition);
     }
 
     public void moveEast() {
-        Position currentPosition = positionList.get(positionList.size() - 1);
+        Position currentPosition = getPosition();
         Position newPosition = new Position(currentPosition.getX() + 1, currentPosition.getY());
         positionList.add(newPosition);
     }
 
+
     public void moveWest() {
-        Position currentPosition = positionList.get(positionList.size() - 1);
+        Position currentPosition = getPosition();
         Position newPosition = new Position(currentPosition.getX() - 1, currentPosition.getY());
         positionList.add(newPosition);
     }
@@ -44,12 +45,11 @@ public class Robot {
         return positionList.get(positionList.size() - 1);
     }
 
-
     public double getDistance() {
         int x0 = positionList.get(0).getX();
         int y0 = positionList.get(0).getY();
-        int x = positionList.get(positionList.size() - 1).getX();
-        int y = positionList.get(positionList.size() - 1).getY();
+        int x = getPosition().getX();
+        int y = getPosition().getY();
         return Math.sqrt(Math.pow(x - x0, 2) + Math.pow(y - y0, 2));
     }
 
